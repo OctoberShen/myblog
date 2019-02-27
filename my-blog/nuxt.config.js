@@ -1,4 +1,4 @@
-const pkg = require('./package')
+const pkg = require('./package');
 
 
 module.exports = {
@@ -28,14 +28,18 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    '@/assets/css/reset.css',
+    '@/assets/css/Normalize.css',
+    '@/assets/icon/iconfont.css'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    {src:'@/assets/icon/iconfont.js', ssr:false}
   ],
 
   /*
@@ -57,12 +61,13 @@ module.exports = {
   */
   build: {
     transpile: [/^element-ui/],
-    
+
     /*
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
-    }
+
+    },
+    cache: true
   }
 }

@@ -1,16 +1,16 @@
 import Koa from 'koa';
-const consola = require('consola')
-const { Nuxt, Builder } = require('nuxt')
+import consola from 'consola';
+import { Nuxt, Builder } from 'nuxt';
 
-const app = new Koa()
+const app = new Koa();
 
 // Import and Set Nuxt.js options
-let config = require('../nuxt.config.js')
-config.dev = !(app.env === 'production')
+let config = require('../nuxt.config.js');
+config.dev = !(app.env === 'production');
 
 async function start() {
   // Instantiate nuxt.js
-  const nuxt = new Nuxt(config)
+  const nuxt = new Nuxt(config);
 
   const {
     host = process.env.HOST || '127.0.0.1',
@@ -28,13 +28,13 @@ async function start() {
     ctx.respond = false // Bypass Koa's built-in response handling
     ctx.req.ctx = ctx // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
     nuxt.render(ctx.req, ctx.res)
-  })
+  });
 
-  app.listen(port, host)
+  app.listen(port, host);
   consola.ready({
     message: `Server listening on http://${host}:${port}`,
     badge: true
   })
 }
 
-start()
+start();
