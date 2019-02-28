@@ -1,15 +1,15 @@
 <template>
-  <section class="container">
-
-  </section>
+  <article class="container">
+    <home-article />
+  </article>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import HomeArticle from '~/components/home/HomeArticle'
 
 export default {
   components: {
-    Logo
+    HomeArticle
   }
 }
 </script>

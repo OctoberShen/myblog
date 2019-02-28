@@ -8,12 +8,11 @@
       </div>
       <div class="nav">
         <el-menu
-          :default-active="activeIndex2"
+          :default-active="activeIndex"
           class="el-menu-nav"
           mode="horizontal"
           background-color="#f9f9f9"
           text-color="#262a30"
-          @click="handleMouseMove"
         >
           <el-menu-item index="1">
             <svg class="icon" aria-hidden="true">
@@ -73,13 +72,11 @@
       name: "my-header",
       data () {
         return {
-          activeIndex2: '1'
+          activeIndex: '1'
         }
       },
       methods: {
-        handleMouseMove: function () {
-          console.log('mousemove');
-        }
+
       }
     }
 </script>
