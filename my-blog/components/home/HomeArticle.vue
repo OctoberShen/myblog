@@ -47,7 +47,7 @@
             articleDigest:'文章摘要打了客服就爱看大力金刚玩打了可视对讲阿卡丽骄傲离开大数据时代的撒垃圾肯定是拉动打打看见卡傻吊就按客人都是高速路开关机可视对讲六块腹肌东方丽景',
             currentDate: '2019-02-28',
             viewCount: 1,
-            imgSrc: 'https://drscdn.500px.org/photo/131078317/h%3D1065/v2?webp=true&sig=232c0afca284d64391919000d8074f5cce7a593d1a0edf5840a757fa113b6562',
+            imgSrc: 'https://drscdn.500px.org/photo/189980635/h%3D1065/v2?webp=true&sig=1a4b9ae32802778e733d8556a7a9769e155f275f5eadfdb460da947df6c2b2ae',
             articleTags: ['vue', 'node', 'elementUI']
           },
           {
@@ -67,7 +67,6 @@
     methods: {
 
     }
-
   }
 </script>
 
@@ -82,7 +81,7 @@
     transition width .3s
     #home
       position relative
-      padding 30px 10px
+      padding 30px 10px 10px 10px
       min-height 100px
       .article-card
         margin-bottom 20px

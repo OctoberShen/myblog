@@ -31,7 +31,8 @@ module.exports = {
     'element-ui/lib/theme-chalk/index.css',
     '@/assets/css/reset.css',
     '@/assets/css/Normalize.css',
-    '@/assets/icon/iconfont.css'
+    '@/assets/icon/iconfont.css',
+    {src: '@/common/stylus/base.styl', lang: 'stylus'}
   ],
 
   /*
@@ -66,6 +67,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
+      console.log('webpack config:', config.resolve)
 
     },
     cache: true
