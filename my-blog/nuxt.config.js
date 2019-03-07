@@ -67,8 +67,6 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      console.log('webpack config:', config.resolve)
-
     },
     cache: true
   }

@@ -1,11 +1,13 @@
 <template>
   <div class="header-container" id="m-header">
     <div class="header-wrapper">
-      <div class="logo">
-        <p class="line"></p>
-        <p class="blog-name">OctoberShen</p>
-        <p class="line"></p>
-      </div>
+      <nuxt-link to="/">
+        <div class="logo">
+          <p class="line"></p>
+          <p class="blog-name">OctoberShen</p>
+          <p class="line"></p>
+        </div>
+      </nuxt-link>
       <div class="nav">
         <el-menu
           :default-active="activeIndex"
@@ -13,49 +15,50 @@
           mode="horizontal"
           background-color="#f9f9f9"
           text-color="#262a30"
+          router
         >
-          <el-menu-item index="1">
+          <el-menu-item index="/">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#iconhome2"></use>
             </svg>
             首页
           </el-menu-item>
 
-          <el-menu-item index="2">
+          <el-menu-item index="/category/MyArticle">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#iconpaper"></use>
             </svg>
             文章
           </el-menu-item>
 
-          <el-menu-item index="3">
+          <el-menu-item index="/fitness/MyFitness">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#iconjianshenfang"></use>
             </svg>
             健身
           </el-menu-item>
 
-          <el-menu-item index="4">
+          <el-menu-item index="/photo/MyPhoto">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#iconsheyinglvxing"></use>
             </svg>
             摄影
           </el-menu-item>
 
-          <el-menu-item index="5">
+          <el-menu-item index="/game/MyGame">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#iconiconfontyouxihudong"></use>
             </svg>
             游戏
           </el-menu-item>
 
-          <el-menu-item index="6">
+          <el-menu-item index="/user/Register">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icontimerauto"></use>
             </svg>
             个人
           </el-menu-item>
-          <el-menu-item index="7">
+          <el-menu-item index="/search/MySearch">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#iconnav-search"></use>
             </svg>
