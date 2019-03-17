@@ -15,7 +15,7 @@
     </div>
     <div class="main-container">
       <my-header></my-header>
-      <nuxt/>
+      <nuxt class="main-content"/>
       <my-footer></my-footer>
     </div>
   </div>
@@ -117,4 +117,6 @@
       width 100%
       flex 1
       position relative
+      .main-content
+        min-height calc(100vh - 210px)
 </style>

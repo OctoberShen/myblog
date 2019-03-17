@@ -1,15 +1,27 @@
-import Koa from 'koa';
-import consola from 'consola';
-import { Nuxt, Builder } from 'nuxt';
-import mongoose from 'mongoose'
-import bodyParser from 'koa-bodyparser'
-import session from 'koa-generic-session'
-import Redis from 'koa-redis'
-import json from 'koa-json'
-import dbConfig from './dbs/config'
-import passport from './interface/utils/passport'
-import users from './interface/users'
-
+// import Koa from 'koa'
+// import consola from 'consola'
+// import { Nuxt, Builder } from 'nuxt'
+// import mongoose from 'mongoose'
+// import bodyParser from 'koa-bodyparser'
+// import session from 'koa-generic-session'
+// import Redis from 'koa-redis'
+// import json from 'koa-json'
+// import dbConfig from './dbs/config'
+// import passport from './interface/utils/passport'
+// import users from './interface/users'
+// import blog from './interface/blog'
+const Koa  = require('koa')
+const consola = require('consola')
+const { Nuxt, Builder } = require('nuxt')
+const mongoose = require('mongoose')
+const bodyParser = require('koa-bodyparser')
+const session = require('koa-generic-session')
+const Redis = require('koa-redis')
+const json = require('koa-json')
+const dbConfig = require('./dbs/config')
+const passport = require('./interface/utils/passport')
+const users = require('./interface/users')
+const blog = require('./interface/blog')
 
 const app = new Koa();
 
@@ -48,6 +60,7 @@ async function start() {
   }
   //引入路由
   app.use(users.routes()).use(users.allowedMethods())
+  app.use(blog.routes()).use(blog.allowedMethods())
   app.use(ctx => {
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling

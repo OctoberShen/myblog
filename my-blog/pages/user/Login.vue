@@ -66,7 +66,7 @@
           }).then(({status,data})=>{
             if(status===200){
               if(data&&data.code===0){
-                location.href='/'
+                location.href='/admin/Admin'
               }else{
                 that.error=data.msg
               }

@@ -8,7 +8,7 @@
         <nuxt-link to="/user/Login">
           <button v-show="!isLogin" type="button" class="signin">立即登录</button>
         </nuxt-link>
-        <nuxt-link to="/user/Exit">
+        <nuxt-link to="/admin/Admin">
           <button v-show="isLogin" type="button" class="blogging">写博客啦</button>
         </nuxt-link>
         <nuxt-link to="/user/Exit">
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
   export default {
     name: "my-aside",
     data() {
@@ -34,12 +35,12 @@
       if (status === 200 && user != "") {
         this.user = user
         this.isLogin = true
+        this.$store.commit('users/changeName', user);//更新用户名
       } else {
-        this.user = 'octobershen'
+        this.user = this.$store.state.users.username //从vuex中获取username
         this.isLogin = false
       }
-    },
-    methods: {}
+    }
   }
 </script>
 

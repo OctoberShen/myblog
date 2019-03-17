@@ -1,6 +1,10 @@
-import  passport from 'koa-passport'
-import LocalStrategy from 'passport-local'
-import UserSchema from '../../dbs/models/users'
+// import  passport from 'koa-passport'
+// import LocalStrategy from 'passport-local'
+// import UserSchema from '../../dbs/models/users'
+
+const passport = require('koa-passport')
+const LocalStrategy = require('passport-local')
+const UserSchema = require('../../dbs/models/users')
 
 passport.use(new LocalStrategy(async function(username, password, done) {
   let where = {
@@ -27,4 +31,5 @@ passport.deserializeUser(function(user, done){
   return done(null, user)
 })
 
-export default passport
+// export default passport
+module.exports=passport
