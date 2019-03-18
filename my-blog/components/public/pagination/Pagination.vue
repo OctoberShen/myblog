@@ -9,6 +9,8 @@
       :total="total"
       :current-page="currentPae"
       @current-change="handleCurrentChange"
+      @prev-click="prevClick"
+      @next-click="nextClick"
     >
     </el-pagination>
   </div>
@@ -16,16 +18,21 @@
 
 <script>
     export default {
+      props: ['pageSize', 'total'],
       data () {
         return {
-          pageSize: 10,
-          total: 1,
           currentPae: 1
         }
       },
       methods: {
         handleCurrentChange: function (val) {
-          console.log(val)
+          this.$emit('currentChange', val);
+        },
+        prevClick: function(val) {
+          // console.log(val)
+        },
+        nextClick: function(val) {
+          // console.log(val)
         }
       }
     }

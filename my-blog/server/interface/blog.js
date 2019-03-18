@@ -39,7 +39,7 @@ router.post('/getArticleList',async (ctx, next) =>　{
     let { parseInt } = Number;
     let page = parseInt((req.page-1) * req.pagesize);
     let pagesize = parseInt(req.pagesize);
-    let article = await ArticleSchema.find({},{__v:0}).skip(page).limit(pagesize).sort({'_id':-1});
+    let article = await ArticleSchema.find({}).skip(page).limit(pagesize).sort({'_id':-1});
     let articleCount = await ArticleSchema.count({});
     ctx.body = {
       code: 0,

@@ -13,6 +13,13 @@
             <el-menu-item index="1-1">文章列表</el-menu-item>
             <el-menu-item index="1-2">文章分类/标签</el-menu-item>
           </el-submenu>
+          <el-submenu index="2">
+            <template slot="title">写博客</template>
+            <nuxt-link to="/blogging/Blogging">
+              <el-menu-item index="2-1">编辑博客</el-menu-item>
+            </nuxt-link>
+            <el-menu-item index="2-2">草稿箱</el-menu-item>
+          </el-submenu>
         </el-menu>
 
       </el-aside>
@@ -25,7 +32,7 @@
           <el-breadcrumb-item>活动详情</el-breadcrumb-item>
         </el-breadcrumb>
         <el-main>
-          <el-table :data="article">
+          <el-table :data="presentation">
             <!--<el-table-column align="center" prop="num" label="序号"></el-table-column>-->
             <el-table-column align="center" prop="createTime" label="发布时间"></el-table-column>
             <el-table-column align="center" prop="title" label="文章名称"></el-table-column>
@@ -53,6 +60,11 @@
               </template>
             </el-table-column>
           </el-table>
+          <pagination-item
+            :page-size="pageSize"
+            :total="articleCount"
+            @currentChange="pageChange"
+          ></pagination-item>
         </el-main>
       </el-container>
     </el-container>
@@ -61,12 +73,20 @@
 
 <script>
   import mongoose from 'mongoose'
+  import paginationItem from '../../components/public/pagination/Pagination'
+
   export default {
     name: "admin",
     layout: 'Blank',
+    components: {
+      paginationItem
+    },
     data() {
       return {
-        article: {}
+        article: [], //全部文章数据
+        pageSize: 10,//每页显示条数
+        articleCount: 0, //总条数
+        currentPage: 1
       }
     },
     async asyncData({app}) {
@@ -81,8 +101,13 @@
       }
     },
     methods: {
+      pageChange(val) {
+        this.currentPage = val//设置当前页码
+      },
       editArticle(obj) {
         console.log(obj)
+        console.log(this.article)
+        console.log(this.presentation)
       },
       deleteArticle(obj) {
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
@@ -92,12 +117,12 @@
         }).then(() => {
           this.$axios.post('/blog/deleteArticle', {id: obj.row._id})
             .then((res) => {
-              if(res.data.code === 0){
+              if (res.data.code === 0) {
                 this.$message({
                   type: 'success',
                   message: '删除成功!'
                 });
-              }else {
+              } else {
                 console.log(res.data.err)
                 this.$message({
                   type: 'warning',
@@ -114,12 +139,13 @@
       }
     },
     computed: {
-      reArt() {
-        return this.article = this.article
+      presentation: function () {
+        let start = (this.currentPage - 1) * this.pageSize
+        let end = this.article.length - start> this.pageSize ? start+this.pageSize : this.article.length
+        return this.article.slice(start, end);
       }
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 

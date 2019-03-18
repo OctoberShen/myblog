@@ -151,7 +151,7 @@
               message: data.msg,
               type: 'success'
             });
-            location.href='/blogging/MarkdownView'
+            location.href='/admin/Admin'
           }else {
             self.$message.error(data.msg);
           }
