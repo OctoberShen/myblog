@@ -1,6 +1,6 @@
 <template>
   <div class="markdown-wrapper">
-    <no-ssr>
+    <!--<no-ssr>-->
       <mavon-editor
         ref="mdV"
         :subfield="false"
@@ -10,7 +10,7 @@
         :ishljs = "true"
         v-model="content.cont"
       />
-    </no-ssr>
+    <!--</no-ssr>-->
   </div>
 </template>
 
@@ -32,9 +32,7 @@
         _id: id
       }).then((res) => {
         this.content = res.data.result
-        console.log(this.content)
       })
-       console.log(this.$ref)
       },
       methods: {
 

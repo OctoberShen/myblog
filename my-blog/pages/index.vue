@@ -22,8 +22,6 @@ export default {
     window.addEventListener("beforeunload",()=>{
       sessionStorage.setItem("store",JSON.stringify(this.$store.state))
     })
-    // this.$axios.get('/users/http://127.0.0.1:8080').then((res) => console.log(res));
-
   }
 }
 </script>

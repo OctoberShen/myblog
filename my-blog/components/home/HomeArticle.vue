@@ -72,7 +72,7 @@
       readMore(e) {
         let id = e.target.attributes[1].nodeValue;
         this.$store.commit('article/GET_ID', id)//将当前点击的文章id保存到vuex
-        location.href='/blogging/MarkdownView'
+        location.href='/category/MyArticle'
       },
       async pageChange(val) {
         let {page, pageSize} = {page: val, pageSize: (this.pageSize)}
