@@ -68,7 +68,7 @@
     data() {
       return {
         title: '',
-        cover: 'http://img4.cache.netease.com/photo/0001/2016-07-13/BRSR3QMR00AO0001.jpg',
+        cover: 'https://drscdn.500px.org/photo/296860839/q%3D80_h%3D450/v2?webp=true&sig=edba83eed405ce95f7137da0c8c181fd0b8386c523b0d6f610ddab90c295f99e',
         content: "",
         tag: '',
         markdownOption: options,
@@ -151,7 +151,8 @@
               message: data.msg,
               type: 'success'
             });
-            location.href='/admin/Admin'
+            // location.href='/admin/Admin'
+            location.href='/'
           }else {
             self.$message.error(data.msg);
           }
@@ -189,4 +190,6 @@
         height 100%
     .publish
       margin-right 2rem
+  .v-note-wrapper
+    min-height calc(100vh - 210px)
 </style>

@@ -68,7 +68,7 @@ router.post('/signup', async (ctx)=> {
     email
   })
   if(nuser) {
-    let res = await axios.post('/users/signin', {username,password})
+    let res = await axios.post('/signin', {username,password})
     if (res.data && res.data.code === 0) {
       ctx.body = {
         code: 0,

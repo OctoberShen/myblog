@@ -1,71 +1,95 @@
 <template>
   <div class="view-wrapper">
     <div id="home">
-      <el-row class="article-card" v-for="(article, index) of articleCard" :key="index">
+      <el-row class="article-card" v-for="(item, index) of article" :key="index">
         <el-col :span="24">
           <el-card :body-style="{ padding: '0px' }">
             <div class="cover">
               <div class="article-title">
-                <span class="title-text">{{article.titleText}}</span>
+                <span :data-id="item._id" class="title-text" @click="readMore">{{item.title}}</span>
               </div>
-              <img :src="article.imgSrc" class="image">
+              <img :src="item.cover" class="image">
             </div>
             <div style="padding: 14px;">
-              <span class="article-digest">{{article.articleDigest}}</span>
+              <span class="article-digest" >{{item.cont === undefined?"":item.cont.substr(0, 15)}}</span>
               <div class="bottom clearfix">
-                <time class="time">{{article.currentDate }}</time>
+                <time class="time" >{{item.createTime === undefined?"":item.createTime.substr(0, 10)}}</time>
                 <span class="view-count">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#iconiconset0207"></use>
-                  </svg>{{article.viewCount}}次浏览</span>
-                <el-button type="text" class="button">阅读原文 >></el-button>
+                  </svg>{{item.__v}}次浏览</span>
+                <button :data-id="item._id" type="text" class="button"  @click="readMore">阅读原文 >></button>
               </div>
             </div>
             <div class="article-tags">
-               <span class="article-tag" v-for="(tag, index) of article.articleTags" :key="index">
+               <span class="article-tag" v-for="(tagItem, index) of item.tag.split(',')" :key="index">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon2"></use>
                 </svg>
-                {{tag}}
+                {{tagItem}}
               </span>
             </div>
           </el-card>
         </el-col>
       </el-row>
+      <pagination-item
+        :page-size="pageSize"
+        :total="total"
+        @currentChange="pageChange"
+      >
+      </pagination-item>
     </div>
   </div>
 </template>
 
 <script>
+  import {mapMutations} from 'vuex'
+  import paginationItem from '../../components/public/pagination/Pagination'
   export default {
     name: "HomeArticle",
+    components: {
+      paginationItem
+    },
     data() {
       return {
-        articleCard: [
-          {
-            titleText:'第一篇文章',
-            articleDigest:'文章摘要打了客服就爱看大力金刚玩打了可视对讲阿卡丽骄傲离开大数据时代的撒垃圾肯定是拉动打打看见卡傻吊就按客人都是高速路开关机可视对讲六块腹肌东方丽景',
-            currentDate: '2019-02-28',
-            viewCount: 1,
-            imgSrc: 'https://drscdn.500px.org/photo/189980635/h%3D1065/v2?webp=true&sig=1a4b9ae32802778e733d8556a7a9769e155f275f5eadfdb460da947df6c2b2ae',
-            articleTags: ['vue', 'node', 'elementUI']
-          },
-          {
-            titleText:'第二篇文章',
-            articleDigest:'文章摘要打了客服就爱看大力金刚玩打了可视对讲阿卡丽骄傲离开大数据时代的撒垃圾肯定是拉动打打看见卡傻吊就按客人都是高速路开关机可视对讲六块腹肌东方丽景',
-            currentDate: '2019-02-28',
-            viewCount: 1,
-            imgSrc: 'https://drscdn.500px.org/photo/179458515/h%3D1065/v2?webp=true&sig=c6a6cfb2f652fc9d96aeec040e1c2c09eee257ea81476579ad38cf0856bb23cf',
-            articleTags: ['vue', 'node', 'elementUI']
-          }
-        ],
+        pageSize: 8,
+        total: 8, //文章总数
+        article: [], //全部文章数据
+        currentPage: 1 //当前页数
       }
     },
-    beforeMount(){
-
+    async mounted() {
+      if(this.$store.state.article.ARTICLE.length > 0){
+        this.article = this.$store.state.article.ARTICLE
+        return
+      }
+      let {page, pageSize} = {page: 1, pageSize: (this.pageSize)}
+      let {data} = await this.$axios.post('/blog/getArticleList', {page, pageSize})
+      this.article = data.article
+      this.total = data.count
     },
     methods: {
-
+      readMore(e) {
+        let id = e.target.attributes[1].nodeValue;
+        this.$store.commit('article/GET_ID', id)//将当前点击的文章id保存到vuex
+        location.href='/blogging/MarkdownView'
+      },
+      async pageChange(val) {
+        let {page, pageSize} = {page: val, pageSize: (this.pageSize)}
+        let {data} = await this.$axios.post('/blog/getArticleList', {page, pageSize})
+        this.article = data.article
+        this.total = data.count
+        //异步更新完数据回到顶部
+        this.timer = setInterval(() => {
+          let osTop = document.documentElement.scrollTop || document.body.scrollTop
+          let ispeed = Math.floor(-osTop / 10)
+          document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed
+          this.isTop = true
+          if (osTop === 0) {
+            clearInterval(this.timer)
+          }
+        }, 5)
+      }
     }
   }
 </script>
@@ -133,6 +157,8 @@
           padding 0
           float right
           color: #303133
+          border none
+          background none
         .button::after
           content ""
           position absolute

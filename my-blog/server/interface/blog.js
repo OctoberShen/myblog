@@ -21,25 +21,44 @@ let router = new Router({
 //   };
 // })
 
-router.get('/getMd',async (ctx, next) =>　{
-  const result = await ArticleSchema.findOne({
-    title: ctx.request.body.title
-  })
-  const results = await ArticleSchema.find({})
-  // 这里没有考虑异常，直接返回了结果
-  ctx.body = {
-    code: 0,
-    result,
-    results
-  }
+router.post('/getMd',async (ctx, next) =>　{
+ try{
+   const result = await ArticleSchema.findOne({
+     _id: ctx.request.body._id
+   })
+   // const results = await ArticleSchema.find({})//全部文章
+   // 这里没有考虑异常，直接返回了结果
+   ctx.body = {
+     code: 0,
+     result
+   }
+ }catch(err) {
+   ctx.body = {
+     code: -1,
+     error: err
+   }
+ }
 })
 router.post('/getArticleList',async (ctx, next) =>　{
   try{
-    let req = ctx.request.query;
-    let { parseInt } = Number;
-    let page = parseInt((req.page-1) * req.pagesize);
-    let pagesize = parseInt(req.pagesize);
-    let article = await ArticleSchema.find({}).skip(page).limit(pagesize).sort({'_id':-1});
+    let req = ctx.request.body;
+    let page = (req.page-1) * req.pageSize;
+    let pageSize = parseInt(req.pageSize);
+    let article = await ArticleSchema.find({}).skip(page).limit(pageSize).sort({'_id':-1});//skip(n)跳过前面的n条数据，limit()限制返回结果的最大数量
+    let articleCount = await ArticleSchema.count({});
+    ctx.body = {
+      code: 0,
+      count:articleCount,
+      article
+    }
+  }catch(e){
+    //handle error
+    ctx.body = {code:1,info:e}
+  }
+})
+router.get('/getAdminArticleList',async (ctx, next) =>　{
+  try{
+    let article = await ArticleSchema.find({}).sort({'_id':-1});
     let articleCount = await ArticleSchema.count({});
     ctx.body = {
       code: 0,
@@ -52,7 +71,6 @@ router.post('/getArticleList',async (ctx, next) =>　{
   }
 
 })
-
 router.post('/saveArticle', async (ctx) => {
   const {
     title,
@@ -84,7 +102,6 @@ router.post('/saveArticle', async (ctx) => {
 router.post('/deleteArticle', async (ctx) => {
   try{
     let {id} = ctx.request.body
-    console.log('str',id)
     let res = await ArticleSchema.remove({_id:id});
     ctx.body={
       code: 0,

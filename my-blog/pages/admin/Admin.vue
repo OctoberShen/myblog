@@ -74,7 +74,7 @@
 <script>
   import mongoose from 'mongoose'
   import paginationItem from '../../components/public/pagination/Pagination'
-
+  import {mapMutations} from 'vuex'
   export default {
     name: "admin",
     layout: 'Blank',
@@ -90,15 +90,14 @@
       }
     },
     async asyncData({app}) {
-      let {page, pageSize} = {page: 1, pageSize: 10}
-      let {data} = await app.$axios.post('/blog/getArticleList', {
-        page,
-        pageSize
-      })
+      let {data} = await app.$axios.get('/blog/getAdminArticleList')
       return {
         article: data.article,
         articleCount: data.count
       }
+    },
+    mounted() {
+      this.$store.commit('article/GET_ARTICLE', this.article)//将文章列表保存到vuex
     },
     methods: {
       pageChange(val) {
@@ -106,8 +105,7 @@
       },
       editArticle(obj) {
         console.log(obj)
-        console.log(this.article)
-        console.log(this.presentation)
+
       },
       deleteArticle(obj) {
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
@@ -122,6 +120,7 @@
                   type: 'success',
                   message: '删除成功!'
                 });
+                location.href='/admin/Admin'
               } else {
                 console.log(res.data.err)
                 this.$message({

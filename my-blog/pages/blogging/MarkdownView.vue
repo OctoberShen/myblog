@@ -8,7 +8,7 @@
         :editable = "false"
         :toolbarsFlag = "false"
         :ishljs = "true"
-        v-model="content"
+        v-model="content.cont"
       />
     </no-ssr>
   </div>
@@ -19,20 +19,25 @@
         name: "markdown-view",
       data() {
           return {
-            content: '# title',
-            articleId: ''
+            content: '# title'
           }
       },
      async mounted() {
-      await this.$axios.get('/blog/getMd', {
-        params: {title: 'test'}
-      }).then((res) => {console.log(res);})
-        // const {status, data} = await this.$axios.get('/blog/getArticle')
-        // if (status === 200 ) {
-        //     console.log(data);
-        // } else {
-        //
-        // }
+       //在页面加载时读取sessionStorage里的状态信息
+       if (window.sessionStorage.getItem("store") ) {
+         this.$store.replaceState(Object.assign({}, this.$store.state,JSON.parse(sessionStorage.getItem("store"))))
+       }
+       let id = this.$store.state.article._id
+      await this.$axios.post('/blog/getMd', {
+        _id: id
+      }).then((res) => {
+        this.content = res.data.result
+        console.log(this.content)
+      })
+       console.log(this.$ref)
+      },
+      methods: {
+
       }
     }
 </script>
@@ -41,6 +46,9 @@
 .markdown-wrapper
   max-width: 1000px
   margin 50px auto
-  .v-show-content
-    background-color #ffffff !important
+  background #ffffff !important
+  .v-note-wrapper
+    min-height calc(100vh - 210px)
+  .v-note-wrapper .v-note-panel .v-note-show .v-show-content
+    background #ffffff !important
 </style>

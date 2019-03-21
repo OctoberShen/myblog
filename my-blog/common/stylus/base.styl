@@ -3,10 +3,6 @@
   box-sizing: border-box
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 
-:after,
-:before
-  box-sizing: border-box
-
 ::selection
     color: #ffffff
     background-color: #262a30
@@ -67,24 +63,3 @@ input:-moz-focusring
 p
   max-height: 100%
 
-.container
-  width: 1170px
-  margin: 0 auto
-.inner
-  width: 900px
-  margin: 0 auto
-.pull-right
-  float: right
-.pull-left
-  float: left
-
-.clearfix
-  &:after
-    clear: both
-  &:before, &:after
-    content: " "
-    display: table
-
-.line-break
-  word-wrap break-word
-  white-space pre-wrap

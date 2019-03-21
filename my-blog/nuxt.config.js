@@ -29,6 +29,7 @@ module.exports = {
   */
   css: [
     'element-ui/lib/theme-chalk/index.css',
+    'mavon-editor/dist/css/index.css',
     '@/assets/css/reset.css',
     '@/assets/css/Normalize.css',
     '@/assets/icon/iconfont.css',
@@ -49,15 +50,44 @@ module.exports = {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    proxy: true, // 开启proxy
+    credentials: true, //认证信息
+    baseURL: `http://${process.env.HOST || 'localhost'}:${process.env.PORT||3000}`,
+    headers: {
+      'Content-Type':'application/json; charset=utf-8'
+    }
   },
-
+  // proxy: {
+  //   '/api': {
+  //     target: 'http://api.com',
+  //     changeOrigin: true,
+  //     pathRewrite: {  //重写地址
+  //       '^/api' : '/'
+  //     },
+  //   },
+  //   '/users': {
+  //     target: 'http://127.0.0.1:8080',
+  //     changeOrigin: true,
+  //     pathRewrite: {  //重写地址
+  //       '^/users' : '/users'
+  //     }
+  //   },
+    // '/blog': {
+    //   target: 'http://www.shenchangbin.top',
+    //   changeOrigin: true,
+    //   pathRewrite: {  //重写地址
+    //     '^/blog' : '/blog'
+    //   }
+    // }
+  // },
   /*
   ** Build configuration
   */
