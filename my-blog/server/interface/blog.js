@@ -99,6 +99,35 @@ router.post('/saveArticle', async (ctx) => {
   }
 })
 
+router.post('/UpdateArticle', async (ctx) => {
+  const {
+    _id,
+    title,
+    createTime,
+    cover,
+    cont,
+    md,
+    tag
+  } = ctx.request.body;//获取前端传来的参数值
+  let article = await ArticleSchema.update({_id:_id},{
+    title,
+    createTime,
+    cover,
+    cont,
+    md,
+    tag
+  }, (err) => {
+    ctx.body = {
+      code: -1,
+      msg: err
+    }
+  })
+  ctx.body = {
+    code: 0,
+    msg: '修改成功'
+  }
+})
+
 router.post('/deleteArticle', async (ctx) => {
   try{
     let {id} = ctx.request.body

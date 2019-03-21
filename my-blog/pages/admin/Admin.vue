@@ -105,7 +105,9 @@
       },
       editArticle(obj) {
         console.log(obj)
-
+        let id = obj.row._id;
+        this.$store.commit('article/GET_ID', id)//将当前点击的文章id保存到vuex
+        location.href='/blogging/EditArticle'
       },
       deleteArticle(obj) {
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {

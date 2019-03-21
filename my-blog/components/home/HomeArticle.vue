@@ -11,13 +11,13 @@
               <img :src="item.cover" class="image">
             </div>
             <div style="padding: 14px;">
-              <span class="article-digest" >{{item.cont === undefined?"":item.cont.substr(0, 15)}}</span>
+              <span class="article-digest" >{{item.cont === undefined?"":item.cont.substr(0, 50)}}</span>
               <div class="bottom clearfix">
                 <time class="time" >{{item.createTime === undefined?"":item.createTime.substr(0, 10)}}</time>
                 <span class="view-count">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#iconiconset0207"></use>
-                  </svg>{{item.__v}}次浏览</span>
+                  </svg>{{articleCount}}次浏览</span>
                 <button :data-id="item._id" type="text" class="button"  @click="readMore">阅读原文 >></button>
               </div>
             </div>
@@ -55,7 +55,8 @@
         pageSize: 8,
         total: 8, //文章总数
         article: [], //全部文章数据
-        currentPage: 1 //当前页数
+        currentPage: 1, //当前页数
+        articleCount: parseInt(Math.random(10,100))
       }
     },
     async mounted() {
