@@ -24,28 +24,28 @@
             首页
           </el-menu-item>
 
-          <el-menu-item index="/category/MyArticle">
+          <el-menu-item index="/category/Tag">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#iconpaper"></use>
             </svg>
-            文章
+            分类
           </el-menu-item>
 
-          <el-menu-item index="/fitness/MyFitness">
+          <el-menu-item v-if="isFinish" index="/fitness/MyFitness">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#iconjianshenfang"></use>
             </svg>
             健身
           </el-menu-item>
 
-          <el-menu-item index="/photo/MyPhoto">
+          <el-menu-item v-if="isFinish" index="/photo/MyPhoto">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#iconsheyinglvxing"></use>
             </svg>
             摄影
           </el-menu-item>
 
-          <el-menu-item index="/game/MyGame">
+          <el-menu-item v-if="isFinish" index="/game/MyGame">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#iconiconfontyouxihudong"></use>
             </svg>
@@ -75,7 +75,8 @@
       name: "my-header",
       data () {
         return {
-          activeIndex: '1'
+          activeIndex: '1',
+          isFinish: false
         }
       },
       methods: {

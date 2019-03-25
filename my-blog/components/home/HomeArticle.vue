@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="article-tags">
-               <span class="article-tag" v-for="(tagItem, index) of item.tag.split(',')" :key="index">
+               <span class="article-tag" v-for="(tagItem, index) of item.tag.split(',')" :key="index" @click="getArticle">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon2"></use>
                 </svg>
@@ -90,6 +90,16 @@
             clearInterval(this.timer)
           }
         }, 5)
+      },
+      getArticle(e) {
+        let tag = this.trim(e.target.innerText);
+        this.$store.commit('article/GET_TAG', tag)
+        sessionStorage.setItem("store", JSON.stringify(this.$store.state))
+        location.href = '/category/TagArticle'
+      },
+      //去掉前后空格
+      trim(str) {
+        return str.replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
       }
     }
   }

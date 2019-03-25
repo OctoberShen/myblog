@@ -33,6 +33,7 @@
     "nodemailer": "^5.1.1",
     "nuxt": "^2.4.0",
     "passport-local": "^1.0.0",
+    "qiniu": "^7.2.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "url-loader": "^1.1.2",

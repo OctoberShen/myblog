@@ -15,7 +15,7 @@
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">写博客</template>
-            <nuxt-link to="/blogging/Blogging">
+            <nuxt-link to="/edit/Blogging">
               <el-menu-item index="2-1">编辑博客</el-menu-item>
             </nuxt-link>
             <el-menu-item index="2-2">草稿箱</el-menu-item>
@@ -107,7 +107,7 @@
         console.log(obj)
         let id = obj.row._id;
         this.$store.commit('article/GET_ID', id)//将当前点击的文章id保存到vuex
-        location.href='/blogging/EditArticle'
+        location.href='/edit/EditArticle'
       },
       deleteArticle(obj) {
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {

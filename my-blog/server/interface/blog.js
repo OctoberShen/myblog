@@ -39,6 +39,39 @@ router.post('/getMd',async (ctx, next) =>　{
    }
  }
 })
+
+router.get('/getTags',async (ctx, next) =>　{
+  try{
+    const tags = await ArticleSchema.find({},{tag: 1})//全部文章
+    ctx.body = {
+      code: 0,
+      tags
+    }
+  }catch(err) {
+    ctx.body = {
+      code: -1,
+      error: err
+    }
+  }
+})
+
+router.post('/getCategory',async (ctx, next) =>　{
+  try{
+    let {tag} = ctx.request.body
+    const article = await ArticleSchema.find({tag: new RegExp(tag, "i")})//查询tag中含有对应字符串的数据
+    ctx.body = {
+      code: 0,
+      article,
+      count: article.length
+    }
+  }catch(err) {
+    ctx.body = {
+      code: -1,
+      error: err
+    }
+  }
+})
+
 router.post('/getArticleList',async (ctx, next) =>　{
   try{
     let req = ctx.request.body;
