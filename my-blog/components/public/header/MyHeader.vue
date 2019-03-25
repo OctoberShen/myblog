@@ -52,7 +52,7 @@
             游戏
           </el-menu-item>
 
-          <el-menu-item index="/user/Register">
+          <el-menu-item index="/user/User">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icontimerauto"></use>
             </svg>
