@@ -17,7 +17,7 @@
                 <span class="view-count">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#iconiconset0207"></use>
-                  </svg>{{articleCount}}次浏览</span>
+                  </svg>{{item.count}}次浏览</span>
                 <button :data-id="item._id" type="text" class="button"  @click="readMore">阅读原文 >></button>
               </div>
             </div>
@@ -55,8 +55,7 @@
         pageSize: 8,
         total: 8, //文章总数
         article: [], //全部文章数据
-        currentPage: 1, //当前页数
-        articleCount: parseInt(Math.random(10,100))
+        currentPage: 1 //当前页数
       }
     },
     async mounted() {

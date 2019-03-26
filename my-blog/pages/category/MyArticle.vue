@@ -17,7 +17,8 @@
   export default {
     data() {
       return {
-        content: '# title'
+        content: '# title',
+        count: 0
       }
     },
     async mounted() {
@@ -30,7 +31,10 @@
         _id: id
       }).then((res) => {
         this.content = res.data.result
+        this.count = res.data.result.count
       })
+      this.count++
+      await this.$axios.post('/blog/UpdateViewCount',{_id: id, count: this.count})
     },
   }
 </script>

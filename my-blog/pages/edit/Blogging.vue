@@ -71,6 +71,7 @@
         cover: 'https://drscdn.500px.org/photo/296860839/q%3D80_h%3D450/v2?webp=true&sig=edba83eed405ce95f7137da0c8c181fd0b8386c523b0d6f610ddab90c295f99e',
         content: "",
         tag: '',
+        count: 0,
         markdownOption: options,
       }
     },
@@ -129,6 +130,7 @@
         let cont = this.content //输入的文本
         let md = this.$refs.md.d_render //html代码
         let tag = this.tag
+        let count = this.count
         if (title=="" || cont=="") {
           this.$message({
             message: '未填写标题或内容',
@@ -143,7 +145,8 @@
           createTime,
           cont,
           md,
-          tag
+          tag,
+          count
         }).then(({status, data}) => {
           if (status === 200 && data.code === 0) {
             //elementUI提示

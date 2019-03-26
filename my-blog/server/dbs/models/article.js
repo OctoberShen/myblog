@@ -24,6 +24,9 @@ const ArticleSchema = new Schema({
   tag: {
     //标签
     type: String
+  },
+  count: {
+    type: Number
   }
 })
 

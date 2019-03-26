@@ -111,7 +111,8 @@ router.post('/saveArticle', async (ctx) => {
     cover,
     cont,
     md,
-    tag
+    tag,
+    count
   } = ctx.request.body;//获取前端传来的参数值
   let article = await ArticleSchema.create({
     title,
@@ -119,7 +120,8 @@ router.post('/saveArticle', async (ctx) => {
     cover,
     cont,
     md,
-    tag
+    tag,
+    count
   }, (err) => {
     ctx.body = {
       code: -1,
@@ -158,6 +160,24 @@ router.post('/UpdateArticle', async (ctx) => {
   ctx.body = {
     code: 0,
     msg: '修改成功'
+  }
+})
+
+router.post('/UpdateViewCount', async (ctx) => {
+  const {
+    _id,
+    count
+  } = ctx.request.body;//获取前端传来的参数值
+  let article = await ArticleSchema.update({_id:_id},{
+   count
+  }, (err) => {
+    ctx.body = {
+      code: -1,
+      msg: err
+    }
+  })
+  ctx.body = {
+    code: 0,
   }
 })
 
