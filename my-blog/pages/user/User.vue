@@ -42,7 +42,7 @@
       <h1 class="user-title">关于我</h1>
       <div class="introduce-wrapper">
         <div class="introduce-item">
-          <p class="question">1.编程经历？</p>
+          <p class="question">1.编程经历</p>
           <p class="answer">
             我叫沈昌斌，24岁，浙江温州人。从一开始的什么都不懂到现在成为一个能独挡一面的前端开发（公司只有我一个前端，没办法咱啥都得会一点啊，哈哈），差不多已经两年的时间了。
               这两年先是重构了公司的智慧校园平台项目，这个项目主要是针对中小学老师日常办公和学生及家长的家校联合的功能。前端主要技术栈是jquery、jquery-ui、bootstrap模板引擎是
@@ -124,6 +124,16 @@
 </script>
 
 <style lang="stylus" scoped>
+@media screen and (max-width 768px)
+  .user
+    max-width 90% !important
+    .user-title
+      font-size 20px !important
+    .question
+      font-size 16px !important
+    .answer
+      font-size 14px !important
+
 .user
   max-width 1000px
   margin 0 auto
@@ -131,8 +141,12 @@
   display flex
   flex-direction column
   align-items center
+  margin-top 50px
+  margin-bottom 50px
+  box-shadow 0 0px 3px rgba(0,0,0,0.157), 0 0px 3px rgba(0,0,0,0.227)
   .user-title
     font-size 24px
+    margin-bottom 20px
   .separator
     display inline-block
     width 100%
@@ -155,6 +169,7 @@
         font-size 16px
         color #7f828b
         padding-left 16px
+        line-height 1.6
         .project-address
           color #449be6
 

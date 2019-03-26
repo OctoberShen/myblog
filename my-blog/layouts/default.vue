@@ -79,6 +79,10 @@
   }
 </script>
 <style lang="stylus" scoped>
+  @media screen and (max-width 1025px)
+    .user-toggle
+      display none
+
   .default
     display flex
     flex-direction row

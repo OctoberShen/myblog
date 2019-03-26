@@ -1,7 +1,7 @@
 <template>
   <div class="header-container" id="m-header">
     <div class="header-wrapper">
-      <nuxt-link to="/">
+      <nuxt-link class="logeLink" to="/">
         <div class="logo">
           <p class="line"></p>
           <p class="blog-name">OctoberShen</p>
@@ -98,7 +98,17 @@
       width: 0
     to
       width: 100px
-.header-container
+@media screen and (max-width 768px)
+    .el-menu-item
+      padding 0 5px
+@media screen and (max-width 420px)
+    .logeLink
+      display none
+    .nav
+      width 100%
+
+
+  .header-container
   position relative
   width 100%
   background-color #f9f9f9

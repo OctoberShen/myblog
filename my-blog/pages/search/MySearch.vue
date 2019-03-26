@@ -50,7 +50,6 @@
     async mounted() {
       let {data} = await this.$axios.get('/blog/getAdminArticleList')
       this._mySession = data.article
-      console.log(this._mySession)
     },
     computed: {
       isNoData() {
