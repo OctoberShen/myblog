@@ -2,11 +2,23 @@
   <div class="blogging-container">
     <div class="blogging-header">
       <input type="text" class="title" v-model="title" placeholder="文章标题..."/>
-      <div class="cover-update" title="上传封面大图">
+      <el-upload
+        class="cover-update"
+        action="/img/uploadImg"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload">
+        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
         <svg class="icon cover-img" aria-hidden="true">
           <use xlink:href="#iconicon-test"></use>
         </svg>
-      </div>
+      </el-upload>
+      <!--<div class="cover-update" title="上传封面大图" @click="uploadCover">-->
+        <!--<svg class="icon cover-img" aria-hidden="true">-->
+          <!--<use xlink:href="#iconicon-test"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
       <input type="text" class="tag" v-model="tag" placeholder="文章标签"/>
       <el-button class="el-button el-button--primary is-plain publish" @click="publishArticle">发布</el-button>
     </div>
@@ -68,10 +80,11 @@
     data() {
       return {
         title: '',
-        cover: 'https://drscdn.500px.org/photo/296860839/q%3D80_h%3D450/v2?webp=true&sig=edba83eed405ce95f7137da0c8c181fd0b8386c523b0d6f610ddab90c295f99e',
+        cover: '',
         content: "",
         tag: '',
         count: 0,
+        imageUrl: '',
         markdownOption: options,
       }
     },
@@ -80,30 +93,49 @@
       saveBlogging(str, md) {
         console.log(str, md)
       },
-      // 绑定@imgAdd event
-      imgAdd(pos, $file) {
+      handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+        this.cover = file.response.img
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传封面图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
+      },
+      imgAdd(pos, file) {
         // 第一步.将图片上传到服务器.
         let self = this
         let formdata = new FormData();
         let $vm = self.$refs.md
-        formdata.append('image', $file);
+        formdata.append('file', file)
         self.$axios({
-          url: 'server url',
+          url: '/img/uploadImg',
           method: 'post',
           data: formdata,
           headers: {'Content-Type': 'multipart/form-data'},
-        }).then((url) => {
+        }).then((res) => {
           // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
           /**
            * $vm 指为mavonEditor实例，可以通过如下两种方式获取
            * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
            * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
            */
-          this.$refs.md.$img2Url(pos, url);
+          $vm.$img2Url(pos, res.data.img);
         })
       },
       imgDel(img) {
-
+        this.$axios.post('/img/deleteImg', {key: img[0].name}).then((res) => {
+          if (res.data.code === 0) {
+            console.log('图片删除成功')
+          }
+        })
       },
       //获取当前时间
       getNowFormatDate() {
@@ -188,9 +220,9 @@
       position absolute
       right 10rem
       cursor pointer
-      .cover-img
-        width 100%
-        height 100%
+      .avatar,.cover-img
+        width 48px
+        height 48px
     .publish
       margin-right 2rem
   .v-note-wrapper

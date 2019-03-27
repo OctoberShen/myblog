@@ -20,6 +20,7 @@
     "element-ui": "^2.4.11",
     "eslint": "^5.15.1",
     "eslint-loader": "^2.1.2",
+    "formidable": "^1.2.1",
     "highlight.js": "^9.15.6",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",

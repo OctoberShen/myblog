@@ -22,6 +22,7 @@ const dbConfig = require('./dbs/config')
 const passport = require('./interface/utils/passport')
 const users = require('./interface/users')
 const blog = require('./interface/blog')
+const img = require('./interface/img')
 
 const app = new Koa();
 
@@ -61,6 +62,7 @@ async function start() {
   //引入路由
   app.use(users.routes()).use(users.allowedMethods())
   app.use(blog.routes()).use(blog.allowedMethods())
+  app.use(img.routes()).use(img.allowedMethods())
   app.use(ctx => {
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling
