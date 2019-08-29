@@ -1,6 +1,6 @@
 <template>
-  <div class="blogging-container">
-    <div class="blogging-header">
+  <div class="drafts-warpper">
+    <div class="drafts-header">
       <input type="text" class="title" v-model="title" placeholder="文章标题...">
       <el-upload
         class="cover-update"
@@ -15,7 +15,7 @@
           <use xlink:href="#iconicon-test"></use>
         </svg>
       </el-upload>
-      <!--<div class="cover-update" title="上传封面大图" @click="uploadCover">-->
+      <!--<div class="cover-update" title="上传封面大图">-->
       <!--<svg class="icon cover-img" aria-hidden="true">-->
       <!--<use xlink:href="#iconicon-test"></use>-->
       <!--</svg>-->
@@ -27,7 +27,7 @@
       <mavon-editor
         ref="md"
         :toolbars="markdownOption"
-        v-model="content"
+        v-model="cont"
         :ishljs="true"
         @save="saveBlogging"
         @change="addDrafts"
@@ -74,25 +74,37 @@ let options = {
   subfield: true, // 单双栏模式
   preview: true // 预览
 }
-
 export default {
-  name: 'blogging',
+  name: 'drafts',
   layout: 'Blank',
   data() {
     return {
+      _id: null,
+      createTime: '',
       title: '',
       cover: '',
-      content: '',
+      cont: '',
       tag: '',
-      count: 0,
       imageUrl: '',
       markdownOption: options
     }
   },
-  components: {},
+  async mounted() {
+    //在页面加载时读取localStorage里的状态信息
+    if (window.localStorage.getItem('article')) {
+        let article = JSON.parse(window.localStorage.getItem('article'))
+         this._id = article._id
+        this.createTime =article.createTime
+        this.title = article.title
+        this.cover = article.cover
+        this.cont = article.cont
+        this.tag = article.tag
+        this.imageUrl = article.cover
+    }
+  },
   methods: {
     saveBlogging(str, md) {
-     this.addDrafts(str, md)//把文章内容加到缓存中
+      this.addDrafts(str, md)
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)
@@ -167,7 +179,7 @@ export default {
         date.getSeconds()
       return currentdate
     },
-    addDrafts(str, value) {
+     addDrafts(str, value) {
       let title = this.title
       let cover = this.cover
       let createTime = this.getNowFormatDate()
@@ -231,7 +243,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.blogging-header {
+.drafts-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -273,3 +285,5 @@ export default {
   min-height: calc(100vh - 210px);
 }
 </style>
+
+

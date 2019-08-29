@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-30 03:03:08
+ * @LastEditTime: 2019-08-30 03:24:12
+ * @LastEditors: Please set LastEditors
+ */
 const Router = require('koa-router')
 const qiniu = require('qiniu')
 const formidable = require('formidable')
@@ -5,10 +12,11 @@ const formidable = require('formidable')
 let router = new Router({
   prefix: '/img'
 })
+
 router.post('/uploadImg',async (ctx, next) =>　{
   try{
-      let accessKey = ''  // 源码删除:七牛云获取 ak,必须配置
-      let secretKey = ''  // 源码删除:七牛云获取 sk, 必须配置
+    let accessKey = 'bdTF5iPtsu8WwxD1nKuPPzQgsLal8-7Uru08-dOe'  // 源码删除:七牛云获取 ak,必须配置
+    let secretKey = 'e-3xl-9cmA6SfmBJopeWSZZ7vT2IczHJM3DAMFW9'  // 源码删除:七牛云获取 sk, 必须配置
       let mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
       let options = {
         scope: 'octobershen',  // 对应七牛云存储空间名称
@@ -55,8 +63,8 @@ router.post('/deleteImg', async (ctx) =>{
   try {
     var bucket = "octobershen";
     var {key} =ctx.request.body ;
-    let accessKey = ''   // 源码删除:七牛云获取 ak,必须配置
-    let secretKey = ''  // 源码删除:七牛云获取 sk,必须配置
+    let accessKey = 'bdTF5iPtsu8WwxD1nKuPPzQgsLal8-7Uru08-dOe'  // 源码删除:七牛云获取 ak,必须配置
+      let secretKey = 'e-3xl-9cmA6SfmBJopeWSZZ7vT2IczHJM3DAMFW9'  // 源码删除:七牛云获取 sk, 必须配置
     let mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
     let config = new qiniu.conf.Config();
     let bucketManager = new qiniu.rs.BucketManager(mac, config);
