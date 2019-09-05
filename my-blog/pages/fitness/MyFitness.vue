@@ -6,7 +6,12 @@
 
 <script>
     export default {
-        name: "my-fitness"
+        name: "my-fitness",
+        data() {
+            return {
+                
+            }
+        }
     }
 </script>
 
