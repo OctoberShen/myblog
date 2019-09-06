@@ -41,7 +41,7 @@
       <span class="separator"></span>
       <h1 class="user-title">关于我</h1>
       <div class="introduce-wrapper">
-        <div class="introduce-item">
+        <!-- <div class="introduce-item">
           <p class="question">1.编程经历</p>
           <p class="answer">
             我叫沈昌斌，24岁，浙江温州人。从一开始的什么都不懂到现在成为一个能独挡一面的前端开发（公司只有我一个前端，没办法咱啥都得会一点啊，哈哈），差不多已经两年的时间了。
@@ -58,9 +58,9 @@
             再接再厉，继续加油！
 
           </p>
-        </div>
+        </div> -->
         <div class="introduce-item">
-          <p class="question">2.技术栈</p>
+          <p class="question">技术栈</p>
           <div class="answer">
             <ul class="answer-list">
               <li>html/html5</li>
@@ -76,7 +76,7 @@
         </div>
 
         <div class="introduce-item">
-          <p class="question">3.兴趣爱好</p>
+          <p class="question">兴趣爱好</p>
           <div class="answer">
             <ul class="answer-list">
               <li>健身</li>
@@ -90,7 +90,7 @@
         </div>
 
         <div class="introduce-item">
-          <p class="question">4.9102年目标</p>
+          <p class="question">9102年目标</p>
           <div class="answer">
             <ul class="answer-list">
               <li>开发完博客剩余功能</li>
@@ -103,7 +103,7 @@
         </div>
 
         <div class="introduce-item">
-          <p class="question">5.联系方式</p>
+          <p class="question">联系方式</p>
           <div class="answer">
             <ul class="answer-list">
               <li>邮箱：shenchangbin@163.com</li>
