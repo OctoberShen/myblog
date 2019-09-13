@@ -1,11 +1,10 @@
 /*
-  yarn add gulp gulp-ssh
+  npm install gulp gulp-ssh
  */
 const gulp = require('gulp')
 const GulpSSH = require('gulp-ssh')
 // 需要上传到服务器的路径
 const remotePath = '/root/myblog/www/nuxtApp/'
-// const remotePath = '/root/test/'
 const config = {
   ssh: { // 正式
     host: '47.98.200.192',
