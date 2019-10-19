@@ -1,7 +1,7 @@
 <template>
-    <section class="my-photo">
-      this is photo
-    </section>
+  <section class="my-photo">
+    this is photo
+  </section>
 </template>
 
 <script>
