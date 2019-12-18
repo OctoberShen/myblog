@@ -10,6 +10,7 @@
       <p class="footer-content">
         本站由@OctoberShen创建
       </p>
+      <div class="num">@2019-2020 octobershen 版权所有 ICP证： <a class="link" href="http://www.beian.miit.gov.cn">浙ICP备17053888号</a></div>
     </div>
   </div>
 </template>
@@ -39,5 +40,8 @@
     flex-direction: column;
     justify-content: center;
     color: #999
+    .num
+      .link
+        color: #e87a06;
 
 </style>
