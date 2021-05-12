@@ -36,7 +36,7 @@
     "koa-router": "^7.4.0",
     "mavon-editor": "^2.7.0",
     "mongoose": "^5.4.17",
-    "nodemailer": "^5.1.1",
+    "nodemailer": "^6.4.16",
     "nuxt": "^2.4.0",
     "passport-local": "^1.0.0",
     "qiniu": "^7.2.1",
